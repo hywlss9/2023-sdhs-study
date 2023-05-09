@@ -30,5 +30,9 @@ export const MainWapper = styled.div`
     &:hover {
       background-color: #d6d6d6;
     }
+    > a {
+      color: #000000;
+      text-decoration: none;
+    }
   }
 `;
