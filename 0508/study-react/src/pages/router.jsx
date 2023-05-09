@@ -1,12 +1,12 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Main from './main';
 
-function Router(){
+function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path='/' element={<Main />} />
       </Routes>
     </BrowserRouter>
   );
