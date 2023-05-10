@@ -12,11 +12,21 @@ export const InputBox = styled.div`
     padding: 4px 8px;
     border: none;
     cursor: pointer;
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 `;
 
 export const Input = styled.input`
-  flex-shrink: 0;
+  flex-shrink: 1;
   width: 100%;
   padding: 4px;
+  border: none;
+  border-bottom: 1px solid #eee;
+  outline: none;
+  &:focus {
+    border-color: #b3b3b3;
+    transition: 0.3s;
+  }
 `;
