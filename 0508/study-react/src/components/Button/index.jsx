@@ -3,7 +3,7 @@ import * as S from './styled';
 function Button(props) {
   return (
     <>
-      <S.Button>{props.children}</S.Button>
+      <S.Button {...props}>{props.children}</S.Button>
     </>
   );
 }
