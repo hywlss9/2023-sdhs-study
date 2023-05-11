@@ -16,12 +16,15 @@ function Todos() {
   };
 
   const deleteTodo = id => {
-    const findIndex = todos.findIndex(v => v.id === id);
-    setTodos(prevState => {
-      const tempArr = [...prevState];
-      tempArr.splice(findIndex, 1);
-      return tempArr;
-    });
+    // const findIndex = todos.findIndex(v => v.id === id);
+    // setTodos(prevState => {
+    //   const tempArr = [...prevState];
+    //   tempArr.splice(findIndex, 1);
+    //   return tempArr;
+    // });
+
+    const filterTodos = todos.filter(v => v.id !== id);
+    setTodos(filterTodos);
   };
 
   useEffect(() => {
