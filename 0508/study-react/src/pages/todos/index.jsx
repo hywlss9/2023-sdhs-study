@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import * as S from './styled';
@@ -23,6 +23,24 @@ function Todos() {
       return tempArr;
     });
   };
+
+  useEffect(() => {
+    try {
+      const parseTodos = JSON.parse(localStorage.getItem('todos'));
+      setTodos(parseTodos);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      const stringifyTodos = JSON.stringify(todos);
+      localStorage.setItem('todos', stringifyTodos);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [todos]);
 
   return (
     <S.Container>
