@@ -29,12 +29,6 @@ export const ButtonBox = styled.div`
   ${Button} {
     color: #fff;
     transition: 0.3s;
-    &.important {
-      background-color: #53d769;
-      &:hover {
-        background-color: #46c263;
-      }
-    }
     &.delete {
       background-color: #fc3d39;
       &:hover {
