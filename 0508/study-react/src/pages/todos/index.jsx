@@ -6,6 +6,7 @@ import * as S from './styled';
 import CreateItemBox from './CreateItemBox';
 import ItemList from './ItemList';
 import SearchInput from '../../components/SearchInput';
+import Button from '../../components/Button';
 
 function Todos() {
   const [todoName, setTodoName] = useState('');
@@ -16,6 +17,9 @@ function Todos() {
   // 그래서 만들었다.
   // 5. searchValue가 (4)에서 바꿔주었기 때문에 바뀐다.
   const [searchValue, setSearchValue] = useState(''); //1
+
+  // 선택한 todos의 id들을 저장하는 state
+  const [selectedTodoIds, setSelectedTodoIds] = useState([]);
 
   const createTodo = () => {
     setTodoName('');
@@ -32,6 +36,23 @@ function Todos() {
 
     const filterTodos = todos.filter(v => v.id !== id);
     setTodos(filterTodos);
+  };
+
+  const deleteSelectedTodos = () => {
+    setTodos(prevState => {
+      // [1,2,3,4,5].findIndex(v=> v === 1); return -> 0
+      // [1,2,3,4,5].includes(v => v === 1); return -> true
+      // todos(id) = [1,2,3,4,5]
+      // selectedTodoids = [2,3]
+      // selectedTodoIds.includes(todo.id);
+      // 1 = !false = true
+      // 2 = !true = false
+      // 3 = !true = false
+      // 4 = !false = true
+      // 5 = !false = true
+
+      return prevState.filter(todo => !selectedTodoIds.includes(todo.id));
+    });
   };
 
   useEffect(() => {
@@ -63,13 +84,18 @@ function Todos() {
         }}
       />
       <CreateItemBox value={todoName} createTodo={createTodo} onChange={setTodoName} />
-
+      <Button onClick={deleteSelectedTodos}>선택 된 To do 삭제</Button>
       {/* 
         6. 4에서 searchValue를 바꿔 주었고, 그 값을 
         ItemList에 props로 전달해준다.
         그래서 ItemList에서 검색 input의 값을 사용할 수 있게 되었다.
        */}
-      <ItemList todos={todos} searchValue={searchValue} deleteTodo={deleteTodo} />
+      <ItemList
+        todos={todos}
+        searchValue={searchValue}
+        deleteTodo={deleteTodo}
+        setSelectedTodoIds={setSelectedTodoIds}
+      />
     </S.Container>
   );
 }
