@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    let currentStateKey = 0;
+    const states = [];
+
+    function useState (initState) {
+      const key = currentStateKey;
+      if(states.length === key) {
+        states.push(initState)
+      }
+
+      const state = states[key];
+      const setState = (newState) => {
+        states[key] = newState;
+        render(); 
+      }
+      currentStateKey += 1;
+      return [ state, setState ];
+    };
+
+    function Counter(){
+      // 첫번째 인자로 count라는 값을 받아오고
+      // 두번째 인자로 setCount라는 값을 받아온다
+      // 위에서 작성한 useState함수에 initState로 1을 전달한다.
+      const [count, setCount] = useState(1);
+
+      // setCount로 count에 +1을 해주는
+      // increment라는 함수를 만들어준다
+      window.increment = () => setCount(count + 1);
+      // function increment(){}
+
+      // tag를 return 한다.
+      return `
+        <div>
+          <strong>count: ${count} </strong>
+          <button onclick="increment()">증가</button>
+        </div>
+      `
+    }
+
+    function Cat () {
+      const [cat, setCat] = useState('고양이');
+
+      window.meow = () => setCat(cat + ' 야옹!');
+
+      return `
+        <div>
+          <strong>${cat}</strong>
+          <button onclick="meow()">고양이의 울음소리</button>
+        </div>
+      `;
+    }
+
+    function render () {
+      const $app = document.querySelector('#app');
+      $app.innerHTML = `
+        <div>
+          ${Counter()}
+          ${Cat()}
+        </div>
+      `
+
+      currentStateKey = 0;
+    }
+
+    render();
+  </script>
+</body>
+</html>
