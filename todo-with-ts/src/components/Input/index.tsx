@@ -1,9 +1,11 @@
 import type { InputHTMLAttributes } from "react";
 
+import * as S from "./styled";
+
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 function Input(props: InputProps) {
-  return <input {...props} />;
+  return <S.Input {...props} />;
 }
 
 export default Input;
